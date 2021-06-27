@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = str(os.environ['SECRET_KEY'])
 Bootstrap(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movies.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ixxtwtjfrpqpgi:3b73700c0df24a74f6988b82c978aefbfb4b2d47dc2d6e1bd96acaf890fbfd5f@ec2-34-195-143-54.compute-1.amazonaws.com:5432/d6j7mlc3s47btc'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
