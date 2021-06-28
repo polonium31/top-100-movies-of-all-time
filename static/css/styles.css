@@ -68,8 +68,9 @@
  .card {
 	 color: inherit;
 	 cursor: pointer;
-	 width: calc(40% - 3rem);
-	 min-width: calc(40% - 3rem);
+	 width: 40%;
+
+	 /*min-width: calc(50%);*/
 	 height: 580px;
 	 min-height: 480px;
 	 perspective: 1000px;
@@ -77,17 +78,24 @@
 	 position: relative;
 	 color: black;
 }
- @media screen and (max-width: 800px) {
+  @media screen and (max-width: 980px) {
 	 .card {
-		 width: 80%;
+		 width: 65%;
 
 	}
 }
- @media screen and (max-width: 500px) {
+ @media screen and (max-width: 800px) {
 	 .card {
-		 width: 50%;
+		 width: 60%;
+
 	}
 }
+ @media screen and (max-width: 540px) {
+	 .card {
+		 width: 100%;
+	}
+}
+
  .front, .back {
 	 display: flex;
 	 border-radius: 6px;
