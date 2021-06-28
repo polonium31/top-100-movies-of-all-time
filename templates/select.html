@@ -13,13 +13,17 @@
 {% block content %}
 <div class="container" style="font-size: 30px;">
     <h1 class="heading">Select Movie</h1>
-    {% for movie in options %}
-  <p>
-    <ul>
-        <li><a href="{{ url_for('find_movie', id=movie.id) }} " style="color: #1a9be6;">{{ movie.original_title }} - {{movie.release_date}}</a></li>
-    </ul>
-  </p>
-  {% endfor %}
-
+    {% if not options%}
+        <span style="color: red">No movie found.</span>
+        <br>
+        <a  class="button" href="{{ url_for('add_movie') }}"> Add again</a>
+    {% else %}
+        {% for movie in options %}
+        <ul>
+            <li><a href="{{ url_for('find_movie', id=movie.id) }} " style="color: #1a9be6;">{{ movie.original_title }} - {{movie.release_date}}</a></li>
+        </ul>
+            <hr>
+      {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -6,6 +6,7 @@ from wtforms import StringField, SubmitField, FloatField
 from wtforms.validators import DataRequired
 import requests
 import os
+
 movie_search = "https://api.themoviedb.org/3/search/movie/"
 API_KEY = str(os.environ['API_KEY'])
 MOVIE_DB_SEARCH_URL = "https://api.themoviedb.org/3/search/movie"
@@ -16,7 +17,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = str(os.environ['SECRET_KEY'])
 Bootstrap(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ixxtwtjfrpqpgi:3b73700c0df24a74f6988b82c978aefbfb4b2d47dc2d6e1bd96acaf890fbfd5f@ec2-34-195-143-54.compute-1.amazonaws.com:5432/d6j7mlc3s47btc'
+app.config[
+    'SQLALCHEMY_DATABASE_URI'] = 'postgresql://ixxtwtjfrpqpgi:3b73700c0df24a74f6988b82c978aefbfb4b2d47dc2d6e1bd96acaf890fbfd5f@ec2-34-195-143-54.compute-1.amazonaws.com:5432/d6j7mlc3s47btc'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -38,15 +40,19 @@ db.create_all()
 
 # form class
 class RateMovieForm(FlaskForm):
-    rating = StringField("Your Rating Out of 10 e.g. 7.5",validators=[DataRequired()], render_kw={'class': 'myfield', 'style': 'border-radius:10px'})
-    review = StringField("Your Review",validators=[DataRequired()], render_kw={'class': 'myfield', 'style': 'border-radius:10px;'})
-    submit = SubmitField("Done", render_kw={'class': 'button', 'style': 'border-radius:10px;width:30%;height:80%; background: linear-gradient(135deg, #1a9be6, #1a57e6);color:white;font-weight:600;'})
+    rating = StringField("Your Rating Out of 10 e.g. 7.5", validators=[DataRequired()],
+                         render_kw={'class': 'myfield', 'style': 'border-radius:10px'})
+    review = StringField("Your Review", validators=[DataRequired()],
+                         render_kw={'class': 'myfield', 'style': 'border-radius:10px;'})
+    submit = SubmitField("Done", render_kw={'class': 'button',
+                                            'style': 'border-radius:10px;width:30%;height:80%; background: linear-gradient(135deg, #1a9be6, #1a57e6);color:white;font-weight:600;'})
 
 
 class FindMovieForm(FlaskForm):
     title = StringField("Movie Title", validators=[DataRequired()],
-                        render_kw={'class': 'myfield', 'style': 'border-radius:10px;width:500px;'})
-    submit = SubmitField("Add Movie", render_kw={'class': 'button', 'style': 'border-radius:10px; width:30%;height:80%; background: linear-gradient(135deg, #1a9be6, #1a57e6);color:white;font-weight:600;'})
+                        render_kw={'class': 'myfield', 'style': 'border-radius:10px;'})
+    submit = SubmitField("Add Movie", render_kw={'class': 'button',
+                                                 'style': 'border-radius:10px; width:30%;height:80%; background: linear-gradient(135deg, #1a9be6, #1a57e6);color:white;font-weight:600;'})
 
 
 @app.route("/")
@@ -107,9 +113,7 @@ def add_movie():
         movie_title = form.title.data
         response = requests.get(movie_search, params={"api_key": API_KEY, "query": movie_title})
         data = response.json()['results']
-        print(data)
         return render_template("select.html", options=data)
-
     return render_template("add.html", form=form)
 
 

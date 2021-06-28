@@ -11,7 +11,7 @@
 {% block title %}Edit Movies{% endblock %}
 
 {% block content %}
-<div class="content" style="font-size: 30px;">
+<div class="content" style="font-size: 30px; padding-left: 2%; padding-right: 2%;">
     <h1 class="heading">{{movie.title}}</h1>
     <p class="description" style="font-size: 30px;">Edit Movie Rating</p>
     {{ wtf.quick_form(form, novalidate=True) }}

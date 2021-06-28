@@ -10,8 +10,8 @@
 {% block title %}Add Movie{% endblock %}
 
 {% block content %}
-<div class="content" style="font-size: 30px;">
-    <h1 class="heading">Add a Movie</h1>
+<div class="col-sm-4" style="font-size: 30px;padding-left: 3%;">
+    <h1 >Add a Movie</h1>
     {{ wtf.quick_form(form, novalidate=True) }}
 </div>
 {% endblock %}
