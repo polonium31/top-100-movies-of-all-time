@@ -9,11 +9,14 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
-{% block title %}My Top 10 Movies{% endblock %}
+
+{% block title %}Top 100 Movies of All Time{% endblock %}
+
+
 
 {% block content %}
 <div class="container">
-  <h1 class="heading">My Top 10 Movies</h1>
+  <h1 class="heading">Top 100 Movies of All Time</h1>
   <p class="description" style="font-size: 20px;font-weight: 400;">These are my all time favourite movies.</p>
 
     {% for movie in movies %}
