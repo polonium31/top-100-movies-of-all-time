@@ -234,3 +234,16 @@
  .release_date {
 	 font-weight: normal;
 }
+
+  @media screen and (max-width: 300px) {
+	 .movie-image{
+
+		 display: none;
+	}
+}
+@media screen and (max-width: 500px) {
+	 .movie-image{
+		 width: 500px;
+		 height: 700px;
+	}
+}

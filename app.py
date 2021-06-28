@@ -113,6 +113,8 @@ def add_movie():
         movie_title = form.title.data
         response = requests.get(movie_search, params={"api_key": API_KEY, "query": movie_title})
         data = response.json()['results']
+        print(data)
+
         return render_template("select.html", options=data)
     return render_template("add.html", form=form)
 
